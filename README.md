@@ -95,7 +95,7 @@ gunicorn --workers 3 --bind 127.0.0.1:8000 run:app
 sudo nano /etc/systemd/system/flaskapp.service
 ```
 
-Вставить следующее (замени ubuntu ):
+Вставить следующее (замени ubuntu на свое имя пользователя):
 
 ```ini
 [Unit]
