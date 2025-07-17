@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Form</title>
+  <meta charset="utf-8">
+  <title>Форма ввода</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
+  <h1>Введите имена</h1>
   <form method="post">
     <div id="fields">
       <input type="text" name="name[]" placeholder="Введите имя">
