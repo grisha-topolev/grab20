@@ -30,6 +30,9 @@ ALTER ROLE flask_user SET client_encoding TO 'utf8';
 ALTER ROLE flask_user SET default_transaction_isolation TO 'read committed';
 ALTER ROLE flask_user SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE flask_db TO flask_user;
+\c flask_db
+GRANT USAGE ON SCHEMA public TO flask_user;
+GRANT CREATE ON SCHEMA public TO flask_user;
 \q
 ```
 
@@ -69,6 +72,8 @@ EOF
 ## 8. Применение миграций базы данных
 
 ```bash
+flask db init
+flask db migrate -m "initial migration"
 flask db upgrade
 ```
 
@@ -90,7 +95,7 @@ gunicorn --workers 3 --bind 127.0.0.1:8000 run:app
 sudo nano /etc/systemd/system/flaskapp.service
 ```
 
-Вставить следующее (замени `/home/ubuntu/grab20` на свой путь, ubuntu - имя пользователя):
+Вставить следующее (замени ubuntu ):
 
 ```ini
 [Unit]
@@ -98,8 +103,8 @@ Description=Gunicorn instance to serve Flask app
 After=network.target
 
 [Service]
-User=www-data
-Group=www-data
+User=ubuntu
+Group=ubuntu
 WorkingDirectory=/home/ubuntu/grab20
 Environment="PATH=/home/ubuntu/grab20/venv/bin"
 ExecStart=/home/ubuntu/grab20/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 run:app
@@ -147,7 +152,7 @@ sudo systemctl restart nginx
 Откройте в браузере:
 
 ```
-http://<ip_адрес_сервера>
+http://localhost/
 ```
 
 ✅ После этих шагов вы получите полностью работающий Flask-проект, развернутый на Gunicorn + Nginx через TCP-порт, с базой данных PostgreSQL.
