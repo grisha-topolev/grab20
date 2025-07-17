@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+  <form method="post">
+    <div id="fields">
+      <input type="text" name="name[]" placeholder="Введите имя">
+    </div>
+    <button type="button" id="add">Добавить</button>
+    <button type="submit">Отправить</button>
+  </form>
+</body>
+</html>
